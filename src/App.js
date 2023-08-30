@@ -5,6 +5,11 @@ import { SlideNavbar } from './Components/SlideNavbar';
 import { HomeTest } from './Components/HomeTest';
 import { TopNavbar } from './Components/TopNavbar';
 import { Product } from './Components/Products/Product';
+import { ProductGroup } from './Components/Products/ProductGroup';
+import { ItemList } from './Components/Products/ItemList';
+import { InventoryManagement } from './Components/Products/InventoryManagement';
+import { Login } from './Components/Login';
+import { Register } from './Components/Register';
 
 function App() {
   return (
@@ -15,14 +20,14 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeTest/>}/> 
         <Route path="/Products" element={<Product/>} /> 
-        {/* <Route path="/Home" element={<Home/>}/>
-          <Route index element={<Home />} /> */}
-           <Route path="/Home" element={<HomeTest/>} />
-           {/* <Route path="/About" element={<About/>} />
+        <Route path="/productgroup" element={<ProductGroup/>}/>
+        
+           <Route path="/itemlist" element={<ItemList/>} />
+            <Route path="/mange_product" element={<InventoryManagement/>} />
 
-          <Route path="/Gallery" element={<Gallery/>} />
-          <Route path="/Service" element={<Service/>} />
-          <Route path="/ConnectWithUs" element={<ConnectWithUs/>}/>
+          <Route path="/Login" element={<Login/>} />
+          <Route path="/Register" element={<Register/>} />
+        {/*  <Route path="/ConnectWithUs" element={<ConnectWithUs/>}/>
           <Route path="/Testimonial" element={<Testimonial/>} />
 
           <Route path="/Contact" element={<Contact/>} />

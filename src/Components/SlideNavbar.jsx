@@ -4,53 +4,50 @@ import { NavLink } from 'react-router-dom'
 export const SlideNavbar = () => {
   return (
     <>
-    <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
-      <div class="sidebar-brand d-none d-md-flex">
-        <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
+    <div className="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+      <div className="sidebar-brand d-none d-md-flex">
+        <svg className="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
           <use xlinkHref="assets/brand/coreui.svg#full"></use>
         </svg>
-        <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
+        <svg className="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
           <use xlinkHref="assets/brand/coreui.svg#signet"></use>
         </svg>
       </div>
-      <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
-        <li class="nav-item"><a class="nav-link" href="index.html">
-            <svg class="nav-icon">
+      <ul className="sidebar-nav" data-coreui="navigation" data-simplebar="">
+        <li className="nav-item"><a className="nav-link" href="index.html">
+            <svg className="nav-icon">
               <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
-            </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="charts.html">
-            <svg class="nav-icon">
-              <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-chart-pie"></use>
-            </svg> Products</a></li>
+            </svg> Dashboard<span className="badge badge-sm bg-info ms-auto">NEW</span></a></li>
+            <li className="nav-item"><NavLink to="/products" className="nav-link">
+            <svg className="nav-icon">
+             
+            </svg> Products</NavLink></li>
        
        
        
-        <li class="nav-title">Details</li>
-        <li class="nav-item"><a class="nav-link" href="colors.html">
-            <svg class="nav-icon">
-              <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-            </svg> Colors</a></li>
+        <li className="nav-title">Details</li>
+        <li className="nav-item"><NavLink to="/products" className="nav-link">
+            <svg className="nav-icon">
+             
+            </svg> Customers</NavLink></li>
       
-        <li class="nav-item"><a class="nav-link" href="charts.html">
-            <svg class="nav-icon">
-              <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-chart-pie"></use>
-            </svg> Charts</a></li>
-            <li class="nav-item"><a class="nav-link" href="charts.html">
-            <svg class="nav-icon">
-              <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-chart-pie"></use>
-            </svg> Charts</a></li>
-            <li class="nav-item"><a class="nav-link" href="charts.html">
-            <svg class="nav-icon">
-              <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-chart-pie"></use>
-            </svg> Charts</a></li>
+        <li className="nav-item"><NavLink to="/products" className="nav-link">
+            <svg className="nav-icon">
+             
+            </svg> Vendors</NavLink></li>
+            <li className="nav-item"><NavLink to="/products" className="nav-link">
+            <svg className="nav-icon">
+             
+            </svg> Report</NavLink></li>
+            
          
        
-        <li class="nav-item"><a class="nav-link nav-link-danger" href="https://coreui.io/pro/" target="_top">
+        <li className="nav-item"><NavLink to className="nav-link nav-link-danger"  target="_top">
            
            
-          </a></li>
+          </NavLink></li>
       </ul>
-      <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
+      <button className="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
     </div>
     
     </>
