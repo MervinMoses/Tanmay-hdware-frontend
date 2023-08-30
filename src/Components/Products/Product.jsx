@@ -1,7 +1,7 @@
 import React from "react";
 import {CardActionArea, Grid} from '@mui/material'
 import { Card, CardContent, Typography,CardActions,Button} from '@mui/material';
-
+import { NavLink } from "react-router-dom";
 
 
 export const Product = () => {
@@ -13,69 +13,81 @@ export const Product = () => {
    <Grid container spacing={4}>
   <Grid item xs={4}>
   <Card sx={{ maxWidth: 500 }}>
-  <CardActionArea>
+  <CardActionArea style={{backgroundColor:"Red"}}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <NavLink to ="/productgroup">
+         
+        <Typography variant="h3" component="div" color="text.secondary">
+          <p>Item Group
+
+
+          </p>
+
+
+
+
+        </Typography>
+        
+     
+      </NavLink>
+       
       </CardActions>
+      </CardContent>
       </CardActionArea>
     </Card>
-
-
-
-    
-    
-
 
   </Grid>
   <Grid item xs={4}>
   <Card sx={{ maxWidth: 800 }}>
-  <CardActionArea>
+  <CardActionArea style={{backgroundColor:"Yellow"}}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+      <NavLink to ="/itemlist">
+         
+         <Typography variant="h3" component="div" color="text.secondary">
+           <p>Item List
+ 
+ 
+           </p>
+ 
+ 
+ 
+ 
+         </Typography>
+         
+      
+       </NavLink>
+       
       </CardActions>
+      </CardContent>
       </CardActionArea>
     </Card>
-
-
-
-  </Grid>
+ </Grid>
 
   <Grid item xs={4}>
   <Card sx={{ maxWidth: 800 }}>
-  <CardActionArea style={{backgroundColor:"lightblue"}}>
+  <CardActionArea style={{backgroundColor:"Green"}}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+      <NavLink to ="/mange_product">
+         
+         <Typography variant="h3" component="div" color="text.secondary">
+           <p>Manage Inventory
+ 
+ 
+           </p>
+ 
+ 
+ 
+ 
+         </Typography>
+         
+      
+       </NavLink>
+       
       </CardActions>
+      </CardContent>
       </CardActionArea>
     </Card>
 
