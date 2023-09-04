@@ -10,6 +10,7 @@ import { ItemList } from './Components/Products/ItemList';
 import { InventoryManagement } from './Components/Products/InventoryManagement';
 import { Login } from './Components/Login';
 import { Register } from './Components/Register';
+import { Customer } from './Components/Customers/Customer';
 
 function App() {
   return (
@@ -27,9 +28,8 @@ function App() {
 
           <Route path="/Login" element={<Login/>} />
           <Route path="/Register" element={<Register/>} />
-        {/*  <Route path="/ConnectWithUs" element={<ConnectWithUs/>}/>
-          <Route path="/Testimonial" element={<Testimonial/>} />
-
+          <Route path="/customer" element={<Customer/>}/>
+         {/* <Route path="/Testimonial" element={<Testimonial/>} />
           <Route path="/Contact" element={<Contact/>} />
           <Route path="*" element={<Nopage />} /> */}
        
@@ -37,8 +37,6 @@ function App() {
       {/* <Totop/>
       <Footer/> */}
     </BrowserRouter>   
-    
-
 
 </>
   );
