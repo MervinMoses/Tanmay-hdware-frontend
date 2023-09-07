@@ -4,7 +4,7 @@ import { Card, CardContent, Typography,CardActions,Button} from '@mui/material';
 import { NavLink } from "react-router-dom";
 
 
-export const vendors = () => {
+export const Vendor = () => {
   return (
     <>
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
@@ -14,9 +14,10 @@ export const vendors = () => {
   <Grid item xs={4}>
   <Card sx={{ maxWidth: 500 }}>
   <CardActionArea style={{backgroundColor:"Red"}}>
+    <Button>
       <CardContent>
       <CardActions>
-        <NavLink to ="/productgroup">
+        <NavLink to ="/PurchaseOrder">
         <Typography variant="h3" component="div" color="text.secondary">
           <p>Purchase Order
        </p>
@@ -24,6 +25,7 @@ export const vendors = () => {
       </NavLink>      
       </CardActions>
       </CardContent>
+      </Button>
       </CardActionArea>
     </Card>
 
@@ -31,9 +33,10 @@ export const vendors = () => {
   <Grid item xs={4}>
   <Card sx={{ maxWidth: 800 }}>
   <CardActionArea style={{backgroundColor:"Yellow"}}>
+    <Button>
       <CardContent>
       <CardActions>
-      <NavLink to ="/itemlist">        
+      <NavLink to ="/VendorInvoice">        
          <Typography variant="h3" component="div" color="text.secondary">
            <p>Invoice
           </p>
@@ -42,6 +45,7 @@ export const vendors = () => {
        
       </CardActions>
       </CardContent>
+      </Button>
       </CardActionArea>
     </Card>
  </Grid>
@@ -49,9 +53,10 @@ export const vendors = () => {
   <Grid item xs={4}>
   <Card sx={{ maxWidth: 800 }}>
   <CardActionArea style={{backgroundColor:"Green"}}>
+    <button>
       <CardContent>
       <CardActions>
-      <NavLink to ="/mange_product"> 
+      <NavLink to ="/vendorCredits"> 
          <Typography variant="h3" component="div" color="text.secondary">
            <p>Vendor Credits
           </p>
@@ -60,15 +65,17 @@ export const vendors = () => {
        
       </CardActions>
       </CardContent>
+      </button>
       </CardActionArea>
     </Card>
   </Grid>
   <Grid item xs={4}>
   <Card sx={{ maxWidth: 800 }}>
   <CardActionArea style={{backgroundColor:"Green"}}>
+    <button>
       <CardContent>
       <CardActions>
-      <NavLink to ="/mange_product">
+      <NavLink to ="/PurchaseReturn">
          
          <Typography variant="h3" component="div" color="text.secondary">
            <p>Purchase returns
@@ -78,15 +85,17 @@ export const vendors = () => {
        
       </CardActions>
       </CardContent>
+      </button>
       </CardActionArea>
     </Card>
   </Grid>
   <Grid item xs={4}>
   <Card sx={{ maxWidth: 800 }}>
   <CardActionArea style={{backgroundColor:"Green"}}>
+    <button>
       <CardContent>
       <CardActions>
-      <NavLink to ="/mange_product">
+      <NavLink to ="/ManageVendors">
          
          <Typography variant="h3" component="div" color="text.secondary">
            <p>Manage Vendors
@@ -96,6 +105,7 @@ export const vendors = () => {
        
       </CardActions>
       </CardContent>
+      </button>
       </CardActionArea>
     </Card>
   </Grid>
