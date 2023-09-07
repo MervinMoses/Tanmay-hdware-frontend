@@ -18,9 +18,10 @@ export const Customer = () => {
             <Grid item xs={4}>
               <Card sx={{ maxWidth: 500 }}>
                 <CardActionArea style={{ backgroundColor: "Red" }}>
+                  <Button>
                   <CardContent>
                     <CardActions>
-                      <NavLink to="/productgroup">
+                      <NavLink to="/sales">
                         <Typography
                           variant="h3"
                           component="div"
@@ -31,15 +32,17 @@ export const Customer = () => {
                       </NavLink>
                     </CardActions>
                   </CardContent>
+                  </Button>
                 </CardActionArea>
               </Card>
             </Grid>
             <Grid item xs={4}>
               <Card sx={{ maxWidth: 800 }}>
                 <CardActionArea style={{ backgroundColor: "Yellow" }}>
+                  <button>
                   <CardContent>
                     <CardActions>
-                      <NavLink to="/itemlist">
+                      <NavLink to="/CustomerInvoice">
                         <Typography
                           variant="h3"
                           component="div"
@@ -50,15 +53,17 @@ export const Customer = () => {
                       </NavLink>
                     </CardActions>
                   </CardContent>
+                  </button>
                 </CardActionArea>
               </Card>
             </Grid>
             <Grid item xs={4}>
               <Card sx={{ maxWidth: 800 }}>
                 <CardActionArea style={{ backgroundColor: "Yellow" }}>
+                  <button>
                   <CardContent>
                     <CardActions>
-                      <NavLink to="/itemlist">
+                      <NavLink to="/salesReturn">
                         <Typography
                           variant="h3"
                           component="div"
@@ -69,15 +74,17 @@ export const Customer = () => {
                       </NavLink>
                     </CardActions>
                   </CardContent>
+                  </button>
                 </CardActionArea>
               </Card>
             </Grid>
             <Grid item xs={4}>
               <Card sx={{ maxWidth: 800 }}>
                 <CardActionArea style={{ backgroundColor: "Yellow" }}>
+                  <button>
                   <CardContent>
                     <CardActions>
-                      <NavLink to="/itemlist">
+                      <NavLink to="/CreditNote">
                         <Typography
                           variant="h3"
                           component="div"
@@ -88,15 +95,17 @@ export const Customer = () => {
                       </NavLink>
                     </CardActions>
                   </CardContent>
+                  </button>
                 </CardActionArea>
               </Card>
             </Grid>
             <Grid item xs={4}>
               <Card sx={{ maxWidth: 800 }}>
                 <CardActionArea style={{ backgroundColor: "Blue" }}>
+                  <button>
                   <CardContent>
                     <CardActions>
-                      <NavLink to="/itemlist">
+                      <NavLink to="/ManageCustomers">
                         <Typography
                           variant="h3"
                           component="div"
@@ -107,6 +116,7 @@ export const Customer = () => {
                       </NavLink>
                     </CardActions>
                   </CardContent>
+                  </button>
                 </CardActionArea>
               </Card>
             </Grid>
@@ -114,9 +124,10 @@ export const Customer = () => {
             <Grid item xs={4}>
               <Card sx={{ maxWidth: 800 }}>
                 <CardActionArea style={{ backgroundColor: "Green" }}>
+                  <button>
                   <CardContent>
                     <CardActions>
-                      <NavLink to="/mange_product">
+                      <NavLink to="/PaymentReceived">
                         <Typography
                           variant="h3"
                           component="div"
@@ -127,6 +138,7 @@ export const Customer = () => {
                       </NavLink>
                     </CardActions>
                   </CardContent>
+                  </button>
                 </CardActionArea>
               </Card>
             </Grid>

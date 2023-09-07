@@ -26,16 +26,16 @@ export const SlideNavbar = () => {
        
        
         <li className="nav-title">Details</li>
-        <li className="nav-item"><NavLink to="/products" className="nav-link">
+        <li className="nav-item"><NavLink to="/customer" className="nav-link">
             <svg className="nav-icon">
              
             </svg> Customers</NavLink></li>
       
-        <li className="nav-item"><NavLink to="/products" className="nav-link">
+        <li className="nav-item"><NavLink to="/vendor" className="nav-link">
             <svg className="nav-icon">
              
             </svg> Vendors</NavLink></li>
-            <li className="nav-item"><NavLink to="/products" className="nav-link">
+            <li className="nav-item"><NavLink to="/" className="nav-link">
             <svg className="nav-icon">
              
             </svg> Report</NavLink></li>
