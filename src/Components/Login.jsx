@@ -1,63 +1,74 @@
 
-import React from 'react'
+import React, { useState } from 'react'
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { database } from '../FirebaseConfig';
+import { NavLink } from 'react-router-dom';
 
 export const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const login = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(database, email, password)
+    .then((userCredential) =>{
+      console.log(userCredential);
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  }
   return (
     <>
-     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+     <div className="wrapper d-flex flex-column min-vh-100 bg-light">
 
-<header class="header header-sticky mb-4">
-       <div class="container">
+<header className="header header-sticky mb-4">
+       <div className="container">
 
-<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+<section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+  <div className="container">
+    <div className="row justify-content-center">
+      <div className="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-        <div class="d-flex justify-content-center py-4">
-          <a href="index.html" class="logo d-flex align-items-center w-auto">
+        <div className="d-flex justify-content-center py-4">
             <img src="assets/img/logo.png" alt=""/>
-            <span class="d-none d-lg-block">NiceAdmin</span>
-          </a>
+            <span className="d-none d-lg-block">Tanmay Hardware</span>
         </div>
 
-        <div class="card mb-3">
+        <div className="card mb-3">
 
-          <div class="card-body">
+          <div className="card-body">
 
-            <div class="pt-4 pb-2">
-              <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-              <p class="text-center small">Enter your username & password to login</p>
+            <div className="pt-4 pb-2">
+              <h5 className="card-title text-center pb-0 fs-4">Login to Your Account</h5>
             </div>
 
-            <form class="row g-3 needs-validation" novalidate>
+            <form className="row g-3 needs-validation" onSubmit={login} novalidate>
 
-              <div class="col-12">
-                <label for="yourUsername" class="form-label">Username</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="inputGroupPrepend">@</span>
-                  <input type="text" name="username" class="form-control" id="yourUsername" required/>
-                  <div class="invalid-feedback">Please enter your username.</div>
+              <div className="col-12">
+                <label for="yourUsername" className="form-label">Email</label>
+                <div className="input-group has-validation">
+                  <input type="email" name="email" className="form-control" id="yourEmail" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                  <div className="invalid-feedback">Please enter your email.</div>
                 </div>
               </div>
 
-              <div class="col-12">
-                <label for="yourPassword" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="yourPassword" required/>
-                <div class="invalid-feedback">Please enter your password!</div>
+              <div className="col-12">
+                <label for="yourPassword" className="form-label">Password</label>
+                <input type="password" name="password" className="form-control" id="yourPassword" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                <div className="invalid-feedback">Please enter your password!</div>
               </div>
 
-              <div class="col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe"/>
-                  <label class="form-check-label" for="rememberMe">Remember me</label>
+              <div className="col-12">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe"/>
+                  <label className="form-check-label" for="rememberMe">Remember me</label>
                 </div>
               </div>
-              <div class="col-12">
-                <button class="btn btn-primary w-100" type="submit">Login</button>
+              <div className="col-12">
+                <button className="btn btn-primary w-100" type="submit">Login</button>
               </div>
-              <div class="col-12">
-                <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
+              <div className="col-12">
+                <p className="small mb-0">Don't have account? <NavLink to="/Register">Create an account</NavLink></p>
               </div>
             </form>
 
