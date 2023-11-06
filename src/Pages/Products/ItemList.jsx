@@ -1,140 +1,151 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
+import PageHeader from "../../components/PageHeader";
+import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
+import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import useTable from "../../components/useTable";
+import * as CustomerService from "../../Services/CustomerService"
+import Controls from "../../components/controls/Controls";
+import { Search } from "@material-ui/icons";
+import AddIcon from '@material-ui/icons/Add';
+import Popup from "../../components/Popup";
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import CloseIcon from '@material-ui/icons/Close';
+import ProductG from './ProductG';
+import { NavLink } from "react-router-dom";
 
-export const ItemList = () => {
-  const [allData, setAllData] = useState([]);
-  const [dynamicTitle, setDynamicTitle] = useState('');
-  const [name, setName] = useState('');
-  const [type, setType] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [head, setHead] = useState('');
-  const [hiddenId, setHiddenId] = useState('');
-  const [actionButton, setActionButton] = useState('');
-  const [disableButton, setDisableButton] = useState(0);
-  const [validationErrors, setValidationErrors] = useState({});
+const useStyles = makeStyles(theme => ({
+    pageContent: {
+        margin: theme.spacing(5),
+        padding: theme.spacing(3)
+    },
+    searchInput: {
+        width: '75%'
+    },
+    newButton: {
+        position: 'absolute',
+        right: '10px'
+    }
+}))
 
-  useEffect(() => {
-    // Fetch data and populate 'allData' state here using Axios or any other method
-    // You should also fetch 'tbl_all_Data_all_Data_hr_all_Data_type' data here if it's dynamic
-  }, []);
 
-  const openModel = () => {
-    
-    // Implement the logic to open the modal
-  };
+const headCells = [
+    { id: 'Product Name', label: 'Product Name' },
+    { id: 'Product Group', label: 'Product Group' },
+    { id: 'Price', label: 'Price' },
+    { id: 'Brand', label: 'Brand' },
+    { id: 'Mfg Date', label: 'Mfg Date' },
+    { id: 'actions', label: 'Actions', disableSorting: true }
+]
 
-  const fetchData = (id) => {
-    // Implement the logic to fetch data based on id
-  };
 
-  const deleteData = (id) => {
-    // Implement the logic to delete data based on id
-  };
+export const ItemList = (props) => {
+    const classes = useStyles();
+    const [recordForEdit, setRecordForEdit] = useState(null)
+    const [records, setRecords] = useState(CustomerService.getAllEmployees())
+    const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+    const [openPopup, setOpenPopup] = useState(false)
 
-  const submitData = () => {
-    // Implement the logic to submit data
-  };
+    const {
+        TblContainer,
+        TblHead,
+        TblPagination,
+        recordsAfterPagingAndSorting
+    } = useTable(records, headCells, filterFn);
+
+    const handleSearch = e => {
+        let target = e.target;
+        setFilterFn({
+            fn: items => {
+                if (target.value == "")
+                    return items;
+                else
+                    return items.filter(x => x.fullName.toLowerCase().includes(target.value))
+            }
+        })
+    }
+
+    const addOrEdit = (employee, resetForm) => {
+        if (employee.id == 0)
+            CustomerService.insertEmployee(employee)
+        else
+            CustomerService.updateEmployee(employee)
+        resetForm()
+        setRecordForEdit(null)
+        setOpenPopup(false)
+        setRecords(CustomerService.getAllEmployees())
+    }
+
+    const openInPopup = item => {
+        setRecordForEdit(item)
+        setOpenPopup(true)
+    }
+
   return (
-<div className="container">
+      <>  
+          <div className="container">
     <div className="row page-titles mx-0">
-      <div className="col p-md-0">
-        <h4>Product List</h4>
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <a href="#">Home</a>
-          </li>
-          <li className="breadcrumb-item active">
-            <a href="#">Product</a>
-          </li>
-          <li className="breadcrumb-item active">
-            <a href="#">Product List</a>
-          </li>
-        </ol>
-        <button
-          type="button"
-          className="btn btn-primary px-5 radius-30 pull-right btn-sm"
-          data-bs-toggle="modal"
-          data-bs-target="#dataModal"
-          onClick={openModel}
-        >
-          Add Product
-        </button>
-        <br />
-      </div>
-    </div>
-    <div className="container">
-    <div className="row">
-      <div className="col-lg-12">
-        <div className="table-responsive">
-          <table
-            className="table datatable table-responsive"
-            style={{ overflowX: 'scroll', blockSize: '100vh' }}
-          >
-            <thead>
-              <tr>
-                <th>Action</th>
-                <th>Product Name</th>
-                <th>Product Type</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>GST</th>
-              </tr>
-            </thead>
-            <tbody>
-              {allData.map((row) => (
-                <tr key={row.hr_manage_member_institute_id}>
-                  <td>
-                    <div className="dropdown">
-                      <button
-                        className="btn btn-primary dropdown-toggle btn-sm"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <i className="fadeIn animated bx bx-list-ul"></i>
-                      </button>
-                      <ul className="dropdown-menu">
-                        <li className="dropdown-item">
-                          <button
-                            type="button"
-                            name="edit"
-                            className="btn btn-primary btn-xs edit"
-                            data-bs-toggle="modal"
-                            data-bs-target="#dataModal"
-                            onClick={() => fetchData(row.hr_manage_member_institute_id)}
-                          >
-                            Edit
-                          </button>
-                        </li>
-                        <li className="dropdown-item">
-                          <button
-                            type="button"
-                            name="delete"
-                            className="btn btn-danger btn-xs delete"
-                            onClick={() => deleteData(row.hr_manage_member_institute_id)}
-                          >
-                            Delete
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                  <td>{row.name}</td>
-                  <td>{row.type}</td>
-                  <td>{row.email}</td>
-                  <td>{row.phone}</td>
-                  <td>{row.head}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div>
-      {/* ... (Modal markup) */}
-    </div>
-  </div>
-   </div>
-     )
+        <h4>Product Group</h4>
+      <ol className="breadcrumb">
+      <li className="breadcrumb-item">
+      <NavLink to="/Home">Home</NavLink>
+      </li>
+      <li className="breadcrumb-item active">
+      <NavLink to="/products">Product</NavLink>
+      </li>
+      <li className="breadcrumb-item active">
+      <NavLink to="/productgroup">Product Group</NavLink>
+      </li>
+    </ol>
+          <PageHeader
+              title="Product Group"
+              subTitle="Details of all the Product"
+              icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
+          />
+          <Paper className={classes.pageContent}>
+
+              <Toolbar>
+                  <Controls.Input
+                      label="Search Product Group"
+                      className={classes.searchInput}
+                      InputProps={{
+                          startAdornment: (<InputAdornment position="start">
+                              <Search />
+                          </InputAdornment>)
+                      }}
+                      onChange={handleSearch}
+                  />
+              </Toolbar>
+              <TblContainer>
+                  <TblHead />
+                  <TableBody>
+                      {
+                          recordsAfterPagingAndSorting().map(item =>
+                              (<TableRow key={item.id}>
+                                  <TableCell>{item.fullName}</TableCell>
+                                  <TableCell>{item.email}</TableCell>
+                                  <TableCell>{item.mobile}</TableCell>
+                                  <TableCell>{item.department}</TableCell>
+                                  <TableCell>
+                                      <Controls.ActionButton
+                                          color="primary"
+                                          onClick={() => { openInPopup(item) }}>
+                                          <EditOutlinedIcon fontSize="small" />
+                                      </Controls.ActionButton>
+                                      <Controls.ActionButton
+                                          color="secondary">
+                                          <CloseIcon fontSize="small" />
+                                      </Controls.ActionButton>
+                                  </TableCell>
+                              </TableRow>)
+                          )
+                      }
+                  </TableBody>
+              </TblContainer>
+              <TblPagination />
+          </Paper>
+      
+          </div>
+          </div>
+      </>
+  )
 }

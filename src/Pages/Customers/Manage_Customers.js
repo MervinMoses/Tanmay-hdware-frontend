@@ -11,7 +11,8 @@ import Popup from "../../components/Popup";
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import CustomerPop from './CustomerPop';
-    
+import { NavLink } from "react-router-dom";
+
 const useStyles = makeStyles(theme => ({
     pageContent: {
         margin: theme.spacing(5),
@@ -28,10 +29,10 @@ const useStyles = makeStyles(theme => ({
 
 
 const headCells = [
-    { id: 'fullName', label: 'Employee Name' },
-    { id: 'email', label: 'Email Address (Personal)' },
+    { id: 'fullName', label: 'Customer Name' },
+    { id: 'city', label: ' City ' },
     { id: 'mobile', label: 'Mobile Number' },
-    { id: 'department', label: 'Department' },
+    { id: 'Email', label: 'Email' },
     { id: 'actions', label: 'Actions', disableSorting: true }
 ]
 
@@ -80,17 +81,31 @@ export const Manage_Customers = (props) => {
     }
 
   return (
-      <>
+      <>  
+          <div className="container">
+    <div className="row page-titles mx-0">
+        <h4>Manage Customer</h4>
+      <ol className="breadcrumb">
+      <li className="breadcrumb-item">
+      <NavLink to="/Home">Home</NavLink>
+      </li>
+      <li className="breadcrumb-item active">
+      <NavLink to="/products">Customers</NavLink>
+      </li>
+      <li className="breadcrumb-item active">
+      <NavLink to="/productgroup">Manage Customers</NavLink>
+      </li>
+    </ol>
           <PageHeader
-              title="New Employee"
-              subTitle="Form design with validation"
+              title="Manage Customer"
+              subTitle="Details of all the customers"
               icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
           />
           <Paper className={classes.pageContent}>
 
               <Toolbar>
                   <Controls.Input
-                      label="Search Employees"
+                      label="Search Customer"
                       className={classes.searchInput}
                       InputProps={{
                           startAdornment: (<InputAdornment position="start">
@@ -136,7 +151,7 @@ export const Manage_Customers = (props) => {
               <TblPagination />
           </Paper>
           <Popup
-              title="Employee Form"
+              title="Customer Form"
               openPopup={openPopup}
               setOpenPopup={setOpenPopup}
           >
@@ -144,6 +159,8 @@ export const Manage_Customers = (props) => {
                   recordForEdit={recordForEdit}
                   addOrEdit={addOrEdit} />
           </Popup>
+          </div>
+          </div>
       </>
   )
 }
