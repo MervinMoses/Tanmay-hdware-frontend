@@ -89,7 +89,7 @@ export const Product = () => {
                 
                     
                     <div className="card-body">
-                        <p><b>Welcome to our Interior Design Business Management System</b></p>
+                        <p><b>Welcome to our Inventory and Billing Management System</b></p>
                         <p>Our system is designed to help interior design businesses manage their operations efficiently and effectively. With our system, you can easily store and manage information such as enquiry details, order details, and order status updates such as placed orders, dispatched orders and completed orders</p>
                         <p className="mb-0">Our system provides you with a convenient dashboard that displays the progress of your orders and the status of your enquiries, allowing you to track everything in one place. You can easily monitor the progress of your orders and make informed decisions based on the information provided in the dashboard.</p>
                         <p className="mb-0">Our Interior Design Business Management System is user-friendly and intuitive, ensuring that you can easily navigate and use it without any difficulty. It is a reliable and efficient system that is designed to meet the unique needs of your interior design business.</p>

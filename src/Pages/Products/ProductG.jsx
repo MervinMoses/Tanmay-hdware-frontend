@@ -7,14 +7,9 @@ import Controls from "../../components/controls/Controls";
 
 const initialFValues = {
     id: 0,
-    fullName: '',
-    email: '',
-    mobile: '',
-    city: '',
-    gender: 'male',
-    departmentId: '',
-    hireDate: new Date(),
-    isPermanent: false,
+    ProductGroup: '',
+    Vendor: '',
+    GST: '',
 }
 
 export default function CustomerPop(props) {
@@ -23,11 +18,11 @@ export default function CustomerPop(props) {
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('Product Group' in fieldValues)
-            temp.fullName = fieldValues.fullName ? "" : "This field is required."
+            temp.ProductGroup = fieldValues.ProductGroup ? "" : "This field is required."
         if ('Vendor' in fieldValues)
-             temp.fullName = fieldValues.fullName ? "" : "This field is required."
+             temp.Vendor = fieldValues.Vendor ? "" : "This field is required."
         if ('GST' in fieldValues)
-            temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
+            temp.GST = fieldValues.GST.length < 5 ? "" : "Minimum 15 numbers required."
         setErrors({
             ...temp
         })
@@ -46,6 +41,7 @@ export default function CustomerPop(props) {
     } = useForm(initialFValues, true, validate);
 
     const handleSubmit = e => {
+        console.log("helio")
         e.preventDefault()
         if (validate()) {
             addOrEdit(values, resetForm);
@@ -53,6 +49,7 @@ export default function CustomerPop(props) {
     }
 
     useEffect(() => {
+        console.log("helio")
         if (recordForEdit != null)
             setValues({
                 ...recordForEdit
@@ -67,23 +64,23 @@ export default function CustomerPop(props) {
                     <Controls.Input
                         name="ProductGroup"
                         label="Product Group"
-                        value={values.fullName}
+                        value={values.ProductGroup}
                         onChange={handleInputChange}
-                        error={errors.fullName}
+                        error={errors.ProductGroup}
                     />
                     <Controls.Input
                         label="Vendor"
                         name="Vendor"
-                        value={values.email}
+                        value={values.Vendor}
                         onChange={handleInputChange}
-                        error={errors.email}
+                        error={errors.Vendor}
                     />
                     <Controls.Input
                         label="GST"
                         name="GST"
-                        value={values.mobile}
+                        value={values.GST}
                         onChange={handleInputChange}
-                        error={errors.mobile}
+                        error={errors.GST}
                     />
                     
                     <div>

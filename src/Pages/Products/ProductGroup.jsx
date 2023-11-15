@@ -58,7 +58,7 @@ export const ProductGroup = (props) => {
                 if (target.value == "")
                     return items;
                 else
-                    return items.filter(x => x.fullName.toLowerCase().includes(target.value))
+                    return items.filter(x => x.ProductGroup.toLowerCase().includes(target.value))
             }
         })
     }
@@ -127,10 +127,9 @@ export const ProductGroup = (props) => {
                       {
                           recordsAfterPagingAndSorting().map(item =>
                               (<TableRow key={item.id}>
-                                  <TableCell>{item.fullName}</TableCell>
-                                  <TableCell>{item.email}</TableCell>
-                                  <TableCell>{item.mobile}</TableCell>
-                                  <TableCell>{item.department}</TableCell>
+                                  <TableCell>{item.ProductGroup}</TableCell>
+                                  <TableCell>{item.Vendor}</TableCell>
+                                  <TableCell>{item.GST}</TableCell>
                                   <TableCell>
                                       <Controls.ActionButton
                                           color="primary"
