@@ -6,12 +6,12 @@ export const SlideNavbar = () => {
     <>
     <div className="sidebar sidebar-dark sidebar-fixed" id="sidebar">
       <div className="sidebar-brand d-none d-md-flex">
-        <svg className="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
+        {/* <svg className="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
           <use xlinkHref="assets/brand/coreui.svg#full"></use>
         </svg>
         <svg className="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
           <use xlinkHref="assets/brand/coreui.svg#signet"></use>
-        </svg>
+        </svg> */}
       </div>
       <ul className="sidebar-nav" data-coreui="navigation" data-simplebar="">
         <li className="nav-item"><a className="nav-link" href="index.html">

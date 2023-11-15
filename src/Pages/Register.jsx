@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { database } from '../FirebaseConfig';
-<<<<<<< HEAD:src/Pages/Register.jsx
 import { NavLink } from 'react-router-dom';
-=======
->>>>>>> main:src/Components/Register.jsx
 
 export const Register = () => {
   const [email, setEmail] = useState('');
@@ -67,11 +64,7 @@ export const Register = () => {
                 <button class="btn btn-primary w-100" type="submit">Create Account</button>
               </div>
               <div class="col-12">
-<<<<<<< HEAD:src/Pages/Register.jsx
                 <p class="small mb-0">Already have an account? <NavLink to ="Login">Log in</NavLink></p>
-=======
-              <p class="small mb-0">Already have an account? <NavLink to ="Login">Log in</NavLink></p>
->>>>>>> main:src/Components/Register.jsx
               </div>
             </form>
 

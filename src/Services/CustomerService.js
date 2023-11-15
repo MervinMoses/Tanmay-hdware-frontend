@@ -1,21 +1,49 @@
+// import db from './firebase';
+import { ref, set,get } from 'firebase/database';
+import {
+    doc,
+    onSnapshot,
+    updateDoc,
+    setDoc,
+    deleteDoc,
+    collection,
+    serverTimestamp,
+    getDocs,
+    query,
+    where,
+    orderBy,
+    limit,
+  } from 'firebase/firestore';
+
 const KEYS = {
-    employees: 'employees',
-    employeeId: 'employeeId'
+    employees: 'ProductGroup',
+    employeeId: 'ProductId '
 }
 
+
 export const getDepartmentCollection = () => ([
-    { id: '1', title: 'Development' },
-    { id: '2', title: 'Marketing' },
-    { id: '3', title: 'Accounting' },
-    { id: '4', title: 'HR' },
+    { id: '1', title: 'ProductGroup' },
+    { id: '2', title: 'Vendor' },
+    { id: '3', title: 'GST' },
 ])
 
-export function insertEmployee(data) {
+export async function insertEmployee(data) {
     let employees = getAllEmployees();
     data['id'] = generateEmployeeId()
     employees.push(data)
     localStorage.setItem(KEYS.employees, JSON.stringify(employees))
-}
+
+    const colletionRef = collection(db, 'productgroups');
+
+    try {
+        // Assuming employees.id is a unique identifier for the document
+        const pRef = doc(colletionRef, employees.id);
+        await setDoc(pRef, employees);
+        console.log("Data added successfully to Firestore!");
+      } catch (error) {
+        console.error("Error adding data to Firestore:", error);
+      }
+    }
 
 export function updateEmployee(data) {
     let employees = getAllEmployees();
@@ -36,10 +64,17 @@ export function getAllEmployees() {
     if (localStorage.getItem(KEYS.employees) == null)
         localStorage.setItem(KEYS.employees, JSON.stringify([]))
     let employees = JSON.parse(localStorage.getItem(KEYS.employees));
-    //map departmentID to department title
+    
+    // map departmentID to department title
     let departments = getDepartmentCollection();
-    return employees.map(x => ({
-        ...x,
-        department: departments[x.departmentId - 1].title
-    }))
+
+    employees = employees.map(x => {
+        const department = departments[x.departmentId - 1];
+        return {
+            ...x,
+            department: department ? department.title : '-'
+        };
+    });
+
+    return employees;
 }
