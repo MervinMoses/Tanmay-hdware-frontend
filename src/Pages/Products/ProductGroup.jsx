@@ -3,7 +3,8 @@ import PageHeader from "../../Components/PageHeader";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
 import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
 import useTable from "../../Components/useTable";
-import * as CustomerService from "../../Services/CustomerService"
+import * as CustomerService from "../../Services/CustomerService";
+import { insertEmployee } from "../../Services/CustomerService";
 import Controls from "../../Components/controls/Controls";
 import { Search } from "@material-ui/icons";
 import AddIcon from '@material-ui/icons/Add';
@@ -62,6 +63,8 @@ export const ProductGroup = (props) => {
             }
         })
     }
+    const employeeData = { id: '30', vendor: 'Jassim', productgroup: 'hi', gst: '545' };
+    insertEmployee(employeeData);
 
     const addOrEdit = (employee, resetForm) => {
         if (employee.id == 0)

@@ -1,4 +1,4 @@
-// import db from './firebase';
+import { db } from '../FirebaseConfig';
 import { ref, set,get } from 'firebase/database';
 import {
     doc,
@@ -28,22 +28,18 @@ export const getDepartmentCollection = () => ([
 ])
 
 export async function insertEmployee(data) {
-    let employees = getAllEmployees();
-    data['id'] = generateEmployeeId()
-    employees.push(data)
-    localStorage.setItem(KEYS.employees, JSON.stringify(employees))
+    const collectionRef = collection(db, 'productgroups');
 
-    const colletionRef = collection(db, 'productgroups');
-
-    try {
-        // Assuming employees.id is a unique identifier for the document
-        const pRef = doc(colletionRef, employees.id);
-        await setDoc(pRef, employees);
+    // Check if data.id is a non-empty string
+    if (typeof data.id === 'string' && data.id.trim() !== '') {
+        const pRef = doc(collectionRef, data.id);
+        await setDoc(pRef, data);
         console.log("Data added successfully to Firestore!");
-      } catch (error) {
-        console.error("Error adding data to Firestore:", error);
-      }
+    } else {
+        console.error("Invalid document ID:", data.id);
     }
+}
+
 
 export function updateEmployee(data) {
     let employees = getAllEmployees();
