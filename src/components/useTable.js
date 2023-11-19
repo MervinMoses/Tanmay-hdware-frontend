@@ -83,14 +83,31 @@ export default function useTable(records, headCells,filterFn) {
     />)
 
     function stableSort(array, comparator) {
-        const stabilizedThis = array.map((el, index) => [el, index]);
-        stabilizedThis.sort((a, b) => {
-            const order = comparator(a[0], b[0]);
-            if (order !== 0) return order;
-            return a[1] - b[1];
-        });
-        return stabilizedThis.map((el) => el[0]);
+        try {
+            if (!Array.isArray(array)) {
+              console.error('Input is not an array:', array);
+              return [];
+            }
+        
+            const stabilizedThis = array.map((el, index) => [el, index]);
+            stabilizedThis.sort((a, b) => {
+              const order = comparator(a[0], b[0]);
+              if (order !== 0) return order;
+              return a[1] - b[1];
+            });
+        
+            const result = stabilizedThis.map((el) => el[0]);
+            return result;
+          } catch (error) {
+            console.error('Error in stabilizeAndSort:', error);
+            throw error;
+          }
     }
+    
+    const comparatorFunction = (a, b) => {
+        // Your comparator logic here
+        return a - b; // Replace with your actual comparison logic
+      };
 
     function getComparator(order, orderBy) {
         return order === 'desc'

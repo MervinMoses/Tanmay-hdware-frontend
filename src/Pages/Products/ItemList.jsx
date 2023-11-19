@@ -41,7 +41,7 @@ const headCells = [
 export const ItemList = (props) => {
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState(CustomerService.getAllEmployees())
+    const [records, setRecords] = useState(CustomerService.getAllProductGroups())
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
     const [openPopup, setOpenPopup] = useState(false)
 
@@ -64,15 +64,15 @@ export const ItemList = (props) => {
         })
     }
 
-    const addOrEdit = (employee, resetForm) => {
-        if (employee.id == 0)
-            CustomerService.insertEmployee(employee)
+    const addOrEdit = (product, resetForm) => {
+        if (product.id == 0)
+            CustomerService.insertproduct(product)
         else
-            CustomerService.updateEmployee(employee)
+            CustomerService.updateProductGroups(product)
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
-        setRecords(CustomerService.getAllEmployees())
+        setRecords(CustomerService.getAllProductGroups())
     }
 
     const openInPopup = item => {
