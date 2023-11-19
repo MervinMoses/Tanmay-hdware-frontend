@@ -1,6 +1,7 @@
-// import db from './firebase';
 import { ref, set,get } from 'firebase/database';
+import { database, analytics, storage, db } from '../FirebaseConfig';
 import {
+    addDoc,
     doc,
     onSnapshot,
     updateDoc,
@@ -14,67 +15,54 @@ import {
     orderBy,
     limit,
   } from 'firebase/firestore';
+  import { toast } from 'react-toastify';
 
-const KEYS = {
-    employees: 'ProductGroup',
-    employeeId: 'ProductId '
-}
-
-
-export const getDepartmentCollection = () => ([
-    { id: '1', title: 'ProductGroup' },
-    { id: '2', title: 'Vendor' },
-    { id: '3', title: 'GST' },
-])
-
-export async function insertEmployee(data) {
-    let employees = getAllEmployees();
-    data['id'] = generateEmployeeId()
-    employees.push(data)
-    localStorage.setItem(KEYS.employees, JSON.stringify(employees))
-
-    const colletionRef = collection(db, 'productgroups');
-
+export async function insertproduct(data) {
+    let products = getAllProductGroups();
     try {
-        // Assuming employees.id is a unique identifier for the document
-        const pRef = doc(colletionRef, employees.id);
-        await setDoc(pRef, employees);
-        console.log("Data added successfully to Firestore!");
-      } catch (error) {
-        console.error("Error adding data to Firestore:", error);
-      }
+        const productRef = collection(db, 'productgroups');
+         
+            await addDoc(productRef, data)
+        
+        toast.success("Add product successfully");
+        console.log("successfully")
+
+    } catch (error) {
+        console.log(error);
+        // setLoading(false)
     }
 
-export function updateEmployee(data) {
-    let employees = getAllEmployees();
-    let recordIndex = employees.findIndex(x => x.id == data.id);
-    employees[recordIndex] = { ...data }
-    localStorage.setItem(KEYS.employees, JSON.stringify(employees));
-}
-
-export function generateEmployeeId() {
-    if (localStorage.getItem(KEYS.employeeId) == null)
-        localStorage.setItem(KEYS.employeeId, '0')
-    var id = parseInt(localStorage.getItem(KEYS.employeeId))
-    localStorage.setItem(KEYS.employeeId, (++id).toString())
-    return id;
-}
-
-export function getAllEmployees() {
-    if (localStorage.getItem(KEYS.employees) == null)
-        localStorage.setItem(KEYS.employees, JSON.stringify([]))
-    let employees = JSON.parse(localStorage.getItem(KEYS.employees));
     
-    // map departmentID to department title
-    let departments = getDepartmentCollection();
+    }
+    export async function updateProductGroups(Id,updatedData) {
+        console.log("up")
+        try {
+          const productRef = doc(collection(db, "productgroups"), Id);
+      
+          // Update the document with the new data
+          await updateDoc(productRef, updatedData);
+      
+          console.log('Product updated successfully');
+        } catch (error) {
+          console.error('Error updating product:', error);
+          throw error; // Rethrow the error if you want to handle it in the calling code
+        }
+      }
 
-    employees = employees.map(x => {
-        const department = departments[x.departmentId - 1];
-        return {
-            ...x,
-            department: department ? department.title : '-'
-        };
-    });
+export async function getAllProductGroups() {
+    try {
+        const querySnapshot = await getDocs(collection(db, 'productgroups'));
+    
+        const productGroups = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log(productGroups)
+        return productGroups
+      } catch (error) {
+        console.error('Error fetching product groups from Firebase:', error);
+        throw error;
+      }
+     }
+    
 
-    return employees;
-}
