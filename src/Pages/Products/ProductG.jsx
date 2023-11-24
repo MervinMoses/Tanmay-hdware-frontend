@@ -12,7 +12,7 @@ const initialFValues = {
     GST: '',
 }
 
-export default function CustomerPop(props) {
+export default function ProductG(props) {
     const { addOrEdit, recordForEdit } = props
 
     const validate = (fieldValues = values) => {
@@ -41,7 +41,6 @@ export default function CustomerPop(props) {
     } = useForm(initialFValues, true, validate);
 
     const handleSubmit = e => {
-        console.log("helio")
         e.preventDefault()
         if (validate()) {
             addOrEdit(values, resetForm);

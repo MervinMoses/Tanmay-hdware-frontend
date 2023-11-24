@@ -2,8 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SlideNavbar } from './Pages/SlideNavbar';
-import { HomeTest } from './Pages/HomeTest';
+import { Dashboard } from './Pages/Dashboard';
 import { TopNavbar } from './Pages/TopNavbar';
+import { SettingsPage } from './Pages/SettingsPage';
+import { ReportPage } from './Pages/ReportPage';
+import { HelpAndSupportPage } from './Pages/HelpAndSupportPage';
 import { Product } from './Pages/Products/Product';
 import { ProductGroup } from './Pages/Products/ProductGroup';
 import { ItemList } from './Pages/Products/ItemList';
@@ -34,10 +37,12 @@ function App() {
         <header class="header header-sticky mb-4">    
          <TopNavbar/>
       <Routes>
-        <Route path="/" element={<HomeTest/>}/> 
-        <Route path="/Products" element={<Product/>} /> 
+        <Route path="/" element={<Dashboard/>}/> 
+        <Route path="/Products" element={<Product/>} />
+        <Route path="/settings" element={<SettingsPage/>} /> 
+        <Route path="/support" element={<HelpAndSupportPage/>} /> 
+        <Route path="/report" element={<ReportPage/>} /> 
         <Route path="/productgroup" element={<ProductGroup/>}/>
-        
            <Route path="/itemlist" element={<ItemList/>} />
             <Route path="/manage_product" element={<InventoryManagement/>} />
           <Route path="/Login" element={<Login/>} />
