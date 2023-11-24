@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, } from '@material-ui/core';
-import { useForm, Form } from '../../components/useForm';
+import { useForm, Form } from '../../Components/useForm';
 import * as CustomerService from '../../Services/CustomerService'
-import Controls from "../../components/controls/Controls";
+import Controls from "../../Components/controls/Controls";
 
 
 const initialFValues = {
