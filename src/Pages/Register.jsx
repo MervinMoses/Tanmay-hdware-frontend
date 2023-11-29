@@ -14,12 +14,19 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
  import Typography from '@mui/material/Typography';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
 export const Register = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState('');
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const register = (e) => {
@@ -27,9 +34,14 @@ export const Register = () => {
     createUserWithEmailAndPassword(database, email, password)
     .then((userCredential) =>{
       console.log(userCredential);
+      navigate("/Login");
+
     })
     .catch((error) => {
       console.log(error)
+      setShowErrorAlert(true);
+      alert(error)
+
     });
   }
   return (
@@ -60,6 +72,14 @@ export const Register = () => {
             alignItems: 'center',
           }}
         >
+                {showErrorAlert && (
+        <Stack sx={{ width: '100%' }} spacing={2}>
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            Invalid username or password — <strong>check it out!</strong>
+          </Alert>
+        </Stack>
+      )}
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -71,9 +91,9 @@ Sign Up          </Typography>
               fullWidth
               id="name"
               label="Name"
-              name="Text"
+              name="Text" 
               autoComplete="name"
-              onChange={event => SetName(event.target.value)}
+              onChange={event => setName(event.target.value)}
               autoFocus
             />
             <TextField
