@@ -1,6 +1,23 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
+import { auth } from '../FirebaseConfig';
+import 'firebase/auth';
+
+
 
 export const TopNavbar = () => {
+  const navigate = useNavigate(); 
+
+  const handleLogout = async () => {
+    try {
+      console.log("hello")
+      await auth.signOut();
+      navigate("/Login"); // Redirect to the login page after logout
+    } catch (error) {
+      console.error('Error during logout:', error);
+      // Handle the error as needed (e.g., show an error message)
+    }
+  };
   return (
     <>
    
@@ -50,10 +67,12 @@ export const TopNavbar = () => {
                   <svg class="icon me-2">
                     <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-file"></use>
                   </svg> Projects<span class="badge badge-sm bg-primary ms-2">42</span></a>
-                <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
-                  <svg class="icon me-2">
-                    <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
-                  </svg> Logout</a>
+                  <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#" onClick={handleLogout}>
+      <svg class="icon me-2">
+        <use xlinkHref="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+      </svg> Logout
+    </a>
               </div>
             </li>
           </ul>

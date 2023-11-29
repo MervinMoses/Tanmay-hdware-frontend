@@ -2,86 +2,143 @@
 import React, { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { database } from '../FirebaseConfig';
+import { useNavigate } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      {/* <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '} */}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const theme = createTheme();
 
 export const Login = () => {
+  const navigate = useNavigate();
+
+
   const [email, setEmail] = useState('');
+
   const [password, setPassword] = useState('');
+  
   const login = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(database, email, password)
     .then((userCredential) =>{
       console.log(userCredential);
+      console.log("successsful")
+      navigate("/Products");
+
     })
     .catch((error) => {
       console.log(error)
+      // notify('Invalid username or password')
     });
   }
   return (
-    <>
-     <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-
-<header className="header header-sticky mb-4">
-       <div className="container">
-
-<section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-  <div className="container">
-    <div className="row justify-content-center">
-      <div className="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
-        <div className="d-flex justify-content-center py-4">
-            <img src="assets/img/logo.png" alt=""/>
-            <span className="d-none d-lg-block">Tanmay Hardware</span>
-        </div>
-
-        <div className="card mb-3">
-
-          <div className="card-body">
-
-            <div className="pt-4 pb-2">
-              <h5 className="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-            </div>
-
-            <form className="row g-3 needs-validation" onSubmit={login} novalidate>
-
-              <div className="col-12">
-                <label for="yourUsername" className="form-label">Email</label>
-                <div className="input-group has-validation">
-                  <input type="email" name="email" className="form-control" id="yourEmail" value={email} onChange={(e) => setEmail(e.target.value)} required/>
-                  <div className="invalid-feedback">Please enter your email.</div>
-                </div>
-              </div>
-
-              <div className="col-12">
-                <label for="yourPassword" className="form-label">Password</label>
-                <input type="password" name="password" className="form-control" id="yourPassword" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-                <div className="invalid-feedback">Please enter your password!</div>
-              </div>
-
-              <div className="col-12">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe"/>
-                  <label className="form-check-label" for="rememberMe">Remember me</label>
-                </div>
-              </div>
-              <div className="col-12">
-                <button className="btn btn-primary w-100" type="submit">Login</button>
-              </div>
-              <div className="col-12">
-                <p className="small mb-0">Don't have account? <NavLink to="/Register">Create an account</NavLink></p>
-              </div>
-            </form>
-
-          </div>
-        </div>
-        </div>
-        </div>
-        </div>
-</section>
-</div>
-</header>
-</div>
-
-    </>
-  )
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form" Validate onSubmit={login} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                // autoComplete="email"
+                onChange={event => setEmail(event.target.value)}
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                onChange={event => setPassword(event.target.value)}
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                <NavLink to="/reset" variant="body2">
+                    Forgot password?
+                  </NavLink>
+                </Grid>
+                <Grid item>
+                <NavLink to="/Register" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </NavLink>
+                </Grid>
+              </Grid>
+              <Copyright sx={{ mt: 5 }} />
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
+  );
 }

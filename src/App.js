@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SlideNavbar } from './Pages/SlideNavbar';
-import { HomeTest } from './Pages/HomeTest';
 import { TopNavbar } from './Pages/TopNavbar';
 import { Product } from './Pages/Products/Product';
 import { ProductGroup } from './Pages/Products/ProductGroup';
@@ -24,17 +24,30 @@ import { Vendor_Credits } from './Pages/Vendors/Vendor_Credits';
 import { Credit_Note } from './Pages/Customers/Credit_Note';
 import { Purchase_Return } from './Pages/Vendors/Purchase_Return';
 import  ForgotPassword  from './Pages/ForgotPassword'
+import { auth } from './FirebaseConfig';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Set up a listener for authentication state changes in Firebase
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      // If the user is logged in, user will be truthy; otherwise, it will be falsy
+      setIsLoggedIn(!!user);
+    });
+  
+    // Clean up the listener when the component unmounts
+    return () => unsubscribe();
+  }, []);
   return (
     <>
-     <BrowserRouter>
-        <SlideNavbar/>
-        <div class="wrapper d-flex flex-column min-vh-100 bg-light">
-        <header class="header header-sticky mb-4">    
-         <TopNavbar/>
-      <Routes>
-        <Route path="/" element={<HomeTest/>}/> 
+      <BrowserRouter>
+        {isLoggedIn && <SlideNavbar />}
+        <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+          <header className="header header-sticky mb-4">
+            {isLoggedIn && <TopNavbar />}
+            <Routes>
+              {isLoggedIn ? (
+                <>
         <Route path="/Products" element={<Product/>} /> 
         <Route path="/productgroup" element={<ProductGroup/>}/>
         
@@ -57,17 +70,23 @@ function App() {
           <Route path="/ManageVendors" element={<Manage_Vendors/>} />
           <Route path="/reset" element={<ForgotPassword/>} />
 
+          </>
+              ) : (
+                // Render a login route if the user is not logged in
+                <>
+                <Route path="/reset" element={<ForgotPassword/>} />
+                <Route path="/*" element={<Login />} />
+                <Route path="/Register" element={<Register/>} />
+                </>
+              )}
+            </Routes>
+          </header>
+        </div>
+      </BrowserRouter>
 
-         {/* <Route path="*" element={<Nopage />} /> */}
-       
-      </Routes>
-      {/* <Totop/>
-      <Footer/> */}
-    </header> 
-    </div>
-    </BrowserRouter>    
+    </>
 
-</>
+
   );
 }
 
